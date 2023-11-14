@@ -6,7 +6,7 @@ Apesar de já conhecer e já ter utilizado a tecnologia Websockets, criei esse r
 
 A principal fonte de estudo sobre os códigos deste repositório está sendo o livro (Websocket)[https://www.amazon.com.br/Websocket-Andrew-Lombardi/dp/1449369278]. 
 
-Você pode apenas analisar os códigos e testá-lo em seu computador localmente claro, afinal vou tentar deixá-los de maneira simples e realizando melhorias para o entendimento e funcionamento, mas recomendarei também a leitura do livro pra entender melhor sobre e aprender alguns possíveis comportamentos ou teorias que não estarão por aqui.
+Você pode apenas analisar os códigos e testá-lo em seu computador localmente claro, afinal vou tentar deixá-los de maneira simples e realizando melhorias para o entendimento e funcionamento, mas recomendarei também a leitura do livro pra entender melhor sobre os conceitos e aprender alguns possíveis comportamentos ou teorias que não estarão por aqui.
 
 ## Como executar
 
