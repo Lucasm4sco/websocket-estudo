@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Websocket</title>
+        <style>
+            :root {
+                --light-color:#fff;
+                --dark-color: #000;
+                --default-blue: #053861;
+                --background: #2b90e2;
+            }
+
+            html, body {
+                margin: 0;
+                height: 100%;
+                background-color: var(--background);
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
+
+            .center {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .common-styles {
+                font-size: 22px;
+                margin: 10px;
+                padding: 10px;
+                border-radius: 5px;
+                border: none;
+            }
+
+            .common-styles:focus {
+                outline: 2px solid var(--default-blue);
+                outline-offset: 3px;
+            }
+
+            .dark {
+                background-color: var(--dark-color);
+                color: var(--light-color);
+                cursor: pointer;
+            }
+
+            legend {
+                font-size: 40px;
+                font-weight: 700;
+                color: var(--light-color);
+            }
+
+            span {
+                font-size: 35px;
+                color: var(--default-blue);
+            }
+        </style>
+    </head>
+    <body class="center">
+        <form onsubmit="return false;">
+            <fieldset class="center common-styles">
+                <legend>Web<span class="light">sockets</span></legend>
+                <input id="message" name="message" class="common-styles" type="text"
+                    placeholder="Escreva alguma mensagem..." />
+                <button class="common-styles dark" type="submit"
+                    onclick="sendMessage()">Send</button>
+            </fieldset>
+        </form>
+    </body>
+
+    <script>
+        const ws = new WebSocket("ws://localhost:8181");
+
+        ws.onopen = (e) => {
+            console.log('Connection to server opened');
+        }
+
+        ws.onmessage = (message) => {
+            console.log('Mensagem recebida do servidor:', message);
+        }
+
+        function sendMessage() {
+            const message = document.getElementById('message').value;
+            console.log(message)
+            ws.send(message);
+        }
+    </script>
+</html>
