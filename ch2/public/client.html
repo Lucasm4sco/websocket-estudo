@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+        <title>Stock Chart over WebSocket</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://bit.ly/cdn-bootstrap-css">
+        <link rel="stylesheet" href="http://bit.ly/cdn-bootstrap-theme">
+        <script src="http://bit.ly/cdn-bootstrap-jq"></script>
+        <script>
+            const stock_request = {"stocks": ["AAPL", "MSFT", "AMZN", "GOOG", "YHOO"]};
+            const stocks = {"AAPL": 0, "MSFT": 0, "AMZN": 0, "GOOG": 0, "YHOO": 0};
+
+            const ws = new WebSocket("ws://localhost:8181");
+
+            ws.onopen = (e) => {
+                console.log("Connection established");
+                ws.send(JSON.stringify(stock_request));
+            };
+
+            // update value element in user interface
+            const changeStockEntry = (symbol, originalValue, newValue) => {
+                const elementStockSelector = `#${symbol} span`;
+                const stockValueElement = $(elementStockSelector);
+                stockValueElement.html(newValue.toFixed(2));
+
+                if(newValue < originalValue) {
+                    stockValueElement.addClass('label-danger');
+                    stockValueElement.removeClass('label-success');
+                    return;
+                }
+
+                if(newValue > originalValue) {
+                    stockValueElement.addClass('label-success');
+                    stockValueElement.removeClass('label-danger');
+                    return;
+                }
+            }
+
+            ws.onmessage = (event) => {
+                const stocksData = JSON.parse(event.data);
+
+                // update the values
+                for(const symbol in stocksData) {
+                    if(stocksData.hasOwnProperty(symbol)) {
+                        const originalValue = stocks[symbol];
+                        const newValue = stocksData[symbol];
+                        changeStockEntry(symbol, originalValue, newValue);
+                        stocks[symbol] = newValue;
+                    }
+                }
+            };
+
+            ws.onerror = (e) => {
+                console.log("WebSocket Error:", e);
+            };
+
+            ws.onclose = (e) => {
+                console.log(e.reason + " " + e.code);
+
+                // clean stock
+                for(var symbol in stocks) {
+                    if(stocks.hasOwnProperty(symbol))
+                        stocks[symbol] = 0;
+                }
+
+                // How to close the WebSocket connection with reason.
+                // ws.close(1000, "Goodbye, World!");
+            }            
+        </script>
+    </head>
+    <body lang="pt">
+        <div class="vertical-center">
+            <div class="container">
+                <h1>Stock Chart over WebSocket</h1>
+                <table class="table" id="stockTable">
+                    <thead>
+                        <tr>
+                            <th>Símbolo</th>
+                            <th>Preço</th>
+                        </tr>
+                    </thead>
+                    <tbody id="stockRows">
+                        <tr>
+                            <td><h3>AAPL</h3></td>
+                            <td id="AAPL">
+                                <h3><span class="label label-default">95.00</span></h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><h3>MSFT</h3></td>
+                            <td id="MSFT">
+                                <h3><span class="label label-default">50.00</span></h3>
+                            </td>
+                            Stock Example UI
+                            |
+                            11
+                            www.it-ebooks.info
+                        </tr>
+                        <tr>
+                            <td><h3>AMZN</h3></td>
+                            <td id="AMZN">
+                                <h3><span class="label label-default">300.00</span></h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><h3>GOOG</h3></td>
+                            <td id="GOOG">
+                                <h3><span class="label label-default">550.00</span></h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><h3>YHOO</h3></td>
+                            <td id="YHOO">
+                                <h3><span class="label label-default">35.00</span></h3>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    </body></html>
