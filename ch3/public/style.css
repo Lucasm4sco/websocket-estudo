@@ -1,0 +1,101 @@
+:root {
+    --light-color: #fff;
+    --dark-color: #000;
+    --default-blue: #053861;
+    --background: #2b90e2;
+    --info-color: #c9c5c5;
+    --warning-color: #f7ff00d2;
+    --error-color: #950202de;
+    --message-color: #fff;
+}
+
+html,
+body {
+    margin: 0;
+    height: 100%;
+    background-color: var(--background);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.common-styles {
+    font-size: 22px;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+.common-styles:focus {
+    outline: 2px solid var(--default-blue);
+    outline-offset: 3px;
+}
+
+.dark {
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    cursor: pointer;
+}
+
+legend {
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--light-color);
+}
+
+span {
+    font-size: 35px;
+    color: var(--default-blue);
+}
+
+#messages {
+    height: 60vh;
+    width: 80vw;
+    max-width: 600px;
+    font-size: 16px;
+    list-style: none;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+fieldset div {
+    width: 100%;
+}
+
+input {
+    display: inline-block;
+    width: 75%;
+}
+
+span.label {
+    font-size: 16px;
+}
+
+p:has(span.label-info),
+span.label-info {
+    color: var(--info-color);
+}
+
+p:has(span.label-warning),
+span.label-warning {
+    color: var(--warning-color)
+}
+
+p:has(span.label-error),
+span.label-error {
+    color: var(--error-color)
+}
+
+p:has(span.label-success) {
+    color: var(--message-color);
+}
+
+span.label-success {
+    color: var(--default-blue);
+}

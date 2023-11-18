@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Websocket chat</title>
+        <link rel="stylesheet" href="/style.css">
+    </head>
+    <body class="center">
+        <form onsubmit="return false;">
+            <fieldset class="center common-styles">
+                <legend>Web<span class="light">sockets</span></legend>
+                <ul id="messages"></ul>
+                <div>
+                    <input id="message" class="common-styles" type="text"
+                        placeholder="Escreva alguma mensagem..." />
+                    <button class="common-styles dark" type="submit"
+                        onclick="sendMessage()">Send</button>
+                </div>
+            </fieldset>
+        </form>
+    </body>
+
+    <script src="./client.js"></script>
+</html>

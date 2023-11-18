@@ -1,0 +1,17 @@
+{
+  "name": "ch3",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "./src/server.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "node-uuid": "^1.4.8",
+    "ws": "^8.14.2"
+  }
+}
